@@ -1,11 +1,13 @@
-package com.example.movies.ui.ui.main
+package com.example.movies.ui.adapter
 
 import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import androidx.fragment.app.FragmentStatePagerAdapter
 import com.example.movies.R
 import com.example.movies.ui.movieslist.MoviesListFragment
+import com.example.movies.ui.searchmovies.SearchMoviesFragment
 
 private val TAB_TITLES = arrayOf(
     R.string.tab_text_1,
@@ -17,7 +19,11 @@ private val TAB_TITLES = arrayOf(
  * one of the sections/tabs/pages.
  */
 class SectionsPagerAdapter(private val context: Context, fm: FragmentManager) :
-    FragmentPagerAdapter(fm) {
+   FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+
+    object Const{
+        val PAGE_COUNT =  2
+    }
 
     override fun getItem(position: Int): Fragment {
         // getItem is called to instantiate the fragment for the given page.
@@ -25,7 +31,9 @@ class SectionsPagerAdapter(private val context: Context, fm: FragmentManager) :
         if (position == 0) {
             return MoviesListFragment.newInstance()
         }
-        return PlaceholderFragment.newInstance(position + 1)
+        else {
+            return SearchMoviesFragment.newInstance()
+        }
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
@@ -33,7 +41,6 @@ class SectionsPagerAdapter(private val context: Context, fm: FragmentManager) :
     }
 
     override fun getCount(): Int {
-        // Show 2 total pages.
-        return 2
+        return Const.PAGE_COUNT
     }
 }

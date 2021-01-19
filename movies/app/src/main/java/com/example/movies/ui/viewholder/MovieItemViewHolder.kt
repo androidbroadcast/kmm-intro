@@ -14,6 +14,12 @@ class MovieItemViewHolder (inflater: LayoutInflater, container: ViewGroup) : Rec
     private var titleText: TextView? = null
     private  var overviewText: TextView? = null
 
+    var tag: Int = 0
+    set(value) {
+        itemView.tag = value
+        field = value
+    }
+
     init {
         image = itemView.findViewById<ImageView>(R.id.image)
         titleText = itemView.findViewById<TextView>(R.id.title_text)

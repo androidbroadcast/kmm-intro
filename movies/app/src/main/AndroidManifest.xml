@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.movies">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".MoviesApp"
         android:allowBackup="true"
-        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Movies">
+        android:theme="@style/Theme.Movies"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".ui.movieitem.MovieItemActivity"></activity>
         <activity
             android:name=".ui.MainTabActivityActivity"
             android:label="@string/title_activity_main_tab_activity"

@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.movies.data.MoviesItem
 import com.example.movies.ui.viewholder.MovieItemViewHolder
 
-class MoviesAdapter : RecyclerView.Adapter<MovieItemViewHolder>() {
+class MoviesAdapter(private val onItemClick: (Int) -> Unit) : RecyclerView.Adapter<MovieItemViewHolder>() {
     private var items: ArrayList<MoviesItem> = arrayListOf()
 
     fun updateItems(items: List<MoviesItem>) {
@@ -22,6 +22,10 @@ class MoviesAdapter : RecyclerView.Adapter<MovieItemViewHolder>() {
     override fun onBindViewHolder(holder: MovieItemViewHolder, position: Int) {
         val item = items[position]
         holder.bindItem(item)
+        holder.tag = position
+        holder.itemView.setOnClickListener {
+            onItemClick(it.tag as Int)
+        }
     }
 
     override fun getItemCount(): Int {

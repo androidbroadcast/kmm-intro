@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="120dp">
     <ImageView
-        android:layout_width="120dp"
+        android:layout_width="80dp"
         android:layout_height="120dp"
         android:scaleType="fitCenter"
         android:layout_alignParentTop="true"
@@ -36,4 +36,9 @@
         android:textColor="@android:color/darker_gray"
         android:textSize="13dp"
         />
+    <View
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
 </RelativeLayout>
