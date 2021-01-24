@@ -8,6 +8,7 @@
 
 import UIKit
 import Kingfisher
+import shared
 
 class MoviesCell: UITableViewCell {
 
@@ -19,9 +20,9 @@ class MoviesCell: UITableViewCell {
         // Initialization code
     }
 
-   /* func setupData(item: MovieItem){
+   func setupData(item: MoviesItem){
         self.movieTitle.text = item.title
         self.movieOverview.text = item.overview
         self.movieImage.kf.setImage(with: URL(string: item.imagePath()))
-    }*/
+    }
 }

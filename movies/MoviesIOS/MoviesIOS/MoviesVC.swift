@@ -7,8 +7,13 @@
 //
 
 import UIKit
+import shared
 
 class MoviesVC: UIViewController {
+    private lazy var service: MoviesService = {
+       return MoviesService()
+    }()
+    
     private var adapter = MoviesAdapter()
     
  
@@ -24,7 +29,13 @@ class MoviesVC: UIViewController {
         super.viewWillAppear(animated)
         self.listView.delegate = adapter
         self.listView.dataSource = adapter
-     
+        self.service.loadMovies { [weak self] (response,error) in
+            guard let self = self else {return}
+            if let data = response?.content?.results {
+                self.adapter.updateItems(items: data)
+                self.listView.reloadData()
+            }
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {

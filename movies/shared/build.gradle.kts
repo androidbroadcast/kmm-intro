@@ -36,7 +36,6 @@ kotlin {
                 implementation("io.ktor:ktor-client-core:$ktorVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:$serializationVersion")
                 implementation("io.ktor:ktor-client-serialization:$ktorVersion")
-                implementation("org.koin:koin-core:3.0.0-alpha-2")
             }
         }
         val androidMain by getting {

@@ -8,17 +8,18 @@
 
 import Foundation
 import UIKit
+import shared
 
 class MoviesAdapter : NSObject,  UITableViewDelegate, UITableViewDataSource {
-   /* private var items: [MovieItem] = [MovieItem]()
+   private var items: [MoviesItem] = [MoviesItem]()
     
-    func updateItems(items: [MovieItem]) {
-        self.items = [MovieItem]()
+    func updateItems(items: [MoviesItem]) {
+        self.items = [MoviesItem]()
         self.items.append(contentsOf: items)
-    }*/
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0//items.count
+        return items.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -26,7 +27,7 @@ class MoviesAdapter : NSObject,  UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         
-        //cell.setupData(item: items[indexPath.row])
+        cell.setupData(item: items[indexPath.row])
         return cell
     }
     
@@ -35,6 +36,6 @@ class MoviesAdapter : NSObject,  UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+        return 120
     }
 }
