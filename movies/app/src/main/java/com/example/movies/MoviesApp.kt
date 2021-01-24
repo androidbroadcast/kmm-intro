@@ -3,6 +3,7 @@ package com.example.movies
 import android.app.Application
 import android.content.Context
 import dagger.hilt.android.HiltAndroidApp
+import com.example.movies.shared.*
 
 @HiltAndroidApp
 class MoviesApp : Application() {
@@ -16,5 +17,6 @@ class MoviesApp : Application() {
         @JvmStatic
         lateinit var INSTANCE: MoviesApp
         var AppContext: Context? = null
+
     }
 }

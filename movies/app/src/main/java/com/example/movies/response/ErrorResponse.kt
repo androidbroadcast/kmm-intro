@@ -1,7 +1,6 @@
 package com.example.movies.response
 
 import com.google.gson.annotations.SerializedName
-import java.lang.Exception
 
 enum class Error {
     Network, Auth, Tech, Other, NotFound, BadAnswer

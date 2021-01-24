@@ -1,20 +1,24 @@
-package com.example.movies.data
+package com.example.movies.model
 
 import android.os.Parcel
 import android.os.Parcelable
-import com.google.gson.annotations.SerializedName
-import kotlinx.android.parcel.Parcelize
+import com.example.movies.shared.data.MoviesItem
 
-
-class MoviesItem() : Parcelable{
-    var id: Long = 0
+class MovieItemModel(): Parcelable {
+    var id:Long = 0
     var title: String? = ""
     var overview: String? = ""
-    @SerializedName("poster_path")
     var posterPath: String? = ""
-
-    @SerializedName("release_date")
     var releaseDate:String? = ""
+    fun imagePath():String  = "http://image.tmdb.org/t/p/w300${posterPath}"
+
+    constructor(item: MoviesItem):this() {
+        this.id = item.id
+        this.title = item.title
+        this.overview = item.overview
+        this.posterPath = item.posterPath
+        this.releaseDate = item.releaseDate
+    }
 
     constructor(parcel: Parcel) : this() {
         id = parcel.readLong()
@@ -24,7 +28,6 @@ class MoviesItem() : Parcelable{
         releaseDate = parcel.readString()
     }
 
-    fun imagePath():String  = "http://image.tmdb.org/t/p/w300${posterPath}"
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeLong(id)
         parcel.writeString(title)
@@ -37,12 +40,12 @@ class MoviesItem() : Parcelable{
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<MoviesItem> {
-        override fun createFromParcel(parcel: Parcel): MoviesItem {
-            return MoviesItem(parcel)
+    companion object CREATOR : Parcelable.Creator<MovieItemModel> {
+        override fun createFromParcel(parcel: Parcel): MovieItemModel {
+            return MovieItemModel(parcel)
         }
 
-        override fun newArray(size: Int): Array<MoviesItem?> {
+        override fun newArray(size: Int): Array<MovieItemModel?> {
             return arrayOfNulls(size)
         }
     }

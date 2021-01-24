@@ -12,6 +12,7 @@ import androidx.lifecycle.distinctUntilChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movies.R
+import com.example.movies.model.MovieItemModel
 import com.example.movies.ui.adapter.MoviesAdapter
 import com.example.movies.ui.movieitem.MovieItemActivity
 import com.zigis.materialtextfield.MaterialTextField
@@ -61,7 +62,8 @@ class SearchMoviesFragment : Fragment() {
 
     fun onMovieClick(index: Int) {
         this.viewModel.getMovie(index)?.let {
-            activity?.startActivity(MovieItemActivity.newIntent(requireActivity(),it))
+            activity?.startActivity(MovieItemActivity.newIntent(requireActivity(),
+                MovieItemModel(it)))
         }
     }
 
