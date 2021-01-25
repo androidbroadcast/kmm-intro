@@ -5,12 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.distinctUntilChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.movies.MovieItemModel
 import com.example.movies.R
+import com.example.movies.shared.viewmodel.MoviesListViewModel
 import com.example.movies.ui.adapter.MoviesAdapter
 import com.example.movies.ui.movieitem.MovieItemActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,7 +25,7 @@ class MoviesListFragment : Fragment() {
 
     private var adapter :MoviesAdapter? = null
     private var list: RecyclerView? = null
-    private val viewModel: MoviesListViewModel by viewModels()
+    private val viewModel = MoviesListViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,16 +39,17 @@ class MoviesListFragment : Fragment() {
     }
 
     private fun setupObservers() {
-        this.viewModel.moviesList.distinctUntilChanged().observe(viewLifecycleOwner, Observer {
+        this.viewModel.moviesList.bind {
             list?.adapter = adapter
-            adapter?.updateItems(it)
+            adapter?.updateItems(it?.results ?: arrayListOf())
             adapter?.notifyDataSetChanged()
-        })
+        }
     }
 
     fun onMovieClick(index: Int) {
         this.viewModel.getMovie(index)?.let {
-            activity?.startActivity(MovieItemActivity.newIntent(requireActivity(),it))
+            activity?.startActivity(MovieItemActivity.newIntent(requireActivity(),
+                MovieItemModel(it)))
         }
     }
 

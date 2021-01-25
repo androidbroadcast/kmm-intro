@@ -1,7 +1,6 @@
 package com.example.movies.moviesService
 
-import com.example.movies.data.MoviesList
-import com.example.movies.network.Configuration
+import com.example.movies.shared.data.MoviesList
 import com.example.movies.network.MoviesAPI
 import com.example.movies.response.ContentResponse
 import javax.inject.Inject

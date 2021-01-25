@@ -1,14 +1,14 @@
 package com.example.movies.ui.movieitem
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.example.movies.data.MoviesItem
+import com.example.movies.MovieItemModel
+import com.example.movies.shared.data.MoviesItem
 import com.example.movies.ui.base.BaseViewModel
 
 class MainViewModel : BaseViewModel() {
-    var movieItem: MutableLiveData<MoviesItem> = MutableLiveData()
+    var movieItem: MutableLiveData<MovieItemModel> = MutableLiveData()
 
-    fun setupItem(item: MoviesItem){
+    fun setupItem(item: MovieItemModel){
         this.movieItem.value = item
     }
 }

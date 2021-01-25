@@ -10,8 +10,9 @@ import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.distinctUntilChanged
+import com.example.movies.MovieItemModel
 import com.example.movies.R
-import com.example.movies.data.MoviesItem
+import com.example.movies.shared.data.MoviesItem
 import com.example.movies.ui.util.ExtraKeys
 import com.example.movies.ui.util.loadImage
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,7 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MovieItemFragment : Fragment() {
 
     companion object {
-        fun newInstance(item: MoviesItem?): MovieItemFragment {
+        fun newInstance(item: MovieItemModel?): MovieItemFragment {
             val f = MovieItemFragment()
             var bundle = Bundle()
             bundle.putParcelable(ExtraKeys.MOVIE_ITEM,item)
@@ -48,7 +49,7 @@ class MovieItemFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         setupObservers()
 
-        arguments?.getParcelable<MoviesItem>(ExtraKeys.MOVIE_ITEM)?.let {
+        arguments?.getParcelable<MovieItemModel>(ExtraKeys.MOVIE_ITEM)?.let {
             viewModel.setupItem(it)
         }
     }

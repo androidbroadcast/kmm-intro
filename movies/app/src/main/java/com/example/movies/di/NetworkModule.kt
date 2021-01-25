@@ -1,6 +1,6 @@
 package com.example.movies.di
 
-import com.example.movies.network.Configuration
+import com.example.movies.shared.network.Configuration
 import com.example.movies.network.MoviesAPI
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -9,7 +9,6 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

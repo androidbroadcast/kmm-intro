@@ -3,7 +3,7 @@ package com.example.movies.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.movies.data.MoviesItem
+import com.example.movies.shared.data.MoviesItem
 import com.example.movies.ui.viewholder.MovieItemViewHolder
 
 class MoviesAdapter(private val onItemClick: (Int) -> Unit) : RecyclerView.Adapter<MovieItemViewHolder>() {

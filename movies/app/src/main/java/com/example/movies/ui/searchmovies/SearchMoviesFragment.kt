@@ -11,7 +11,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.distinctUntilChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.movies.MovieItemModel
 import com.example.movies.R
+import com.example.movies.shared.viewmodel.SearchViewModel
 import com.example.movies.ui.adapter.MoviesAdapter
 import com.example.movies.ui.movieitem.MovieItemActivity
 import com.zigis.materialtextfield.MaterialTextField
@@ -26,7 +28,7 @@ class SearchMoviesFragment : Fragment() {
     private var adapter: MoviesAdapter?  = null
     private var list: RecyclerView? = null
     private var inputView: MaterialTextField? = null
-    private  val viewModel: SearchMoviesViewModel by viewModels()
+    private  val viewModel = SearchViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,11 +44,11 @@ class SearchMoviesFragment : Fragment() {
     }
 
     private fun setupObservers() {
-        this.viewModel.moviesList.distinctUntilChanged().observe(viewLifecycleOwner, Observer {
+        this.viewModel.moviesList.bind{
             list?.adapter = adapter
-            adapter?.updateItems(it)
+            adapter?.updateItems(it?.results ?: arrayListOf())
             adapter?.notifyDataSetChanged()
-        })
+        }
         this.inputView?.addTextChangedListener(object:TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
@@ -61,7 +63,8 @@ class SearchMoviesFragment : Fragment() {
 
     fun onMovieClick(index: Int) {
         this.viewModel.getMovie(index)?.let {
-            activity?.startActivity(MovieItemActivity.newIntent(requireActivity(),it))
+            activity?.startActivity(MovieItemActivity.newIntent(requireActivity(),
+                MovieItemModel(it)))
         }
     }
 

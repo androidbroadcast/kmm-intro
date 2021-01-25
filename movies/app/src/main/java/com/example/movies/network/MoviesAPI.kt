@@ -1,6 +1,7 @@
 package com.example.movies.network
 
-import com.example.movies.data.MoviesList
+import com.example.movies.shared.data.MoviesList
+import com.example.movies.shared.network.Configuration
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
