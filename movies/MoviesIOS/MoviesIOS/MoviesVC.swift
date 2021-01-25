@@ -10,8 +10,8 @@ import UIKit
 import shared
 
 class MoviesVC: UIViewController {
-    private lazy var service: MoviesService = {
-       return MoviesService()
+    private lazy var viewModel: MoviesListViewModel = {
+       return MoviesListViewModel()
     }()
     
     private var adapter = MoviesAdapter()
@@ -22,20 +22,24 @@ class MoviesVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.listView.register(UINib(nibName: "MoviesCell", bundle: nil), forCellReuseIdentifier: "MoviesCell")
-      
+        bindViewModel()
+    }
+    
+    func bindViewModel() {
+        self.viewModel.moviesItems.bind { [weak self] (list) in
+            guard let self = self else {return}
+            if let data = list?.results {
+                self.adapter.updateItems(items: data)
+                self.listView.reloadData()
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.listView.delegate = adapter
         self.listView.dataSource = adapter
-        self.service.loadMovies { [weak self] (response,error) in
-            guard let self = self else {return}
-            if let data = response?.content?.results {
-                self.adapter.updateItems(items: data)
-                self.listView.reloadData()
-            }
-        }
+        self.viewModel.loadMovies()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

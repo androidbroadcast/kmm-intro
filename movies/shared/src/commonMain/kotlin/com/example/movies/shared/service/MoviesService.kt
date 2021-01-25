@@ -4,9 +4,11 @@ import com.example.movies.shared.data.MoviesList
 import com.example.movies.shared.network.Configuration
 import com.example.movies.shared.network.NetworkService
 import com.example.movies.shared.network.response.ContentResponse
+import kotlin.native.concurrent.ThreadLocal
 
 
 class MoviesService {
+    @ThreadLocal
     companion object {
         val instance = MoviesService()
     }
